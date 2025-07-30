@@ -50,7 +50,7 @@ app.get('/tasks', async (req,res) => {{
 }});
 
 
-// 3.GET a single task (GET /tasks/:id)
+// 3.GET a  task (PUT /tasks/:id)
 
 app.put('/tasks/:id', async (req, res) => {
     try {
@@ -64,3 +64,14 @@ app.put('/tasks/:id', async (req, res) => {
         res.status(400).json({error: err.message})
     }
 });
+
+// DELETE task (DELETE /tasks/:id)
+
+app.delete('/tasks/:id', async (req, res) => {
+    try {
+        await Task.findByIdAndDelete(req.params.id);
+        res.json({message: "Task deleted"});
+    }catch (err){
+        res.status(400).json({error: err.message});
+    }
+})
