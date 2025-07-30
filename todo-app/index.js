@@ -47,4 +47,20 @@ app.post('/tasks', async (req, res) => {
 app.get('/tasks', async (req,res) => {{
     const tasks = await Task.find();
     res.json(tasks);
-}})
+}});
+
+
+// 3.GET a single task (GET /tasks/:id)
+
+app.put('/tasks/:id', async (req, res) => {
+    try {
+        const task = await Task.findByIdAndUpdate(
+            req.params.id, 
+        {completed: req.body.completed},
+         {new: true}
+          );
+          res.json(task);
+    } catch (err) {
+        res.status(400).json({error: err.message})
+    }
+});
