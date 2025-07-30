@@ -40,3 +40,11 @@ app.post('/tasks', async (req, res) => {
         res.status(400).json({error: err.message})
     }
 });
+
+
+
+// 2.Get all tasks (GET /tasks)
+app.get('/tasks', async (req,res) => {{
+    const tasks = await Task.find();
+    res.json(tasks);
+}})
